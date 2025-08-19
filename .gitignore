@@ -1,0 +1,74 @@
+# Nix & NixOS
+result/
+*.drv
+*.result
+.cache/
+.nix-*
+/env/
+.env
+.envrc
+.direnv/
+.nix-channels
+.nix-defexpr
+.nix-profile
+.nix-gc-times
+.nix-store
+
+# Neovim
+/.local/
+.swap/
+.session/
+shada/
+nvimundo/
+*.swp
+*.swo
+*.swn
+*.tmp
+*.bak
+*.un~
+*.log
+*.out
+
+# Lua
+*.luac
+*.lua~
+
+# IDEs
+.vscode/
+.idea/
+*.code-workspace
+*.sublime-workspace
+*.sublime-project
+*.komodoproject
+*.kateproject
+*.atom/
+*.c9/
+*.project
+*.tmproj
+*.editorconfig
+*~ 
+
+# Other environment and package managers
+node_modules/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.venv/
+venv/
+*.egg-info/
+
+# OS-specific
+.DS_Store
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Backup files
+*~
+*.orig
+*.rej
+
+# Miscellaneous
+tags
+TAGS
