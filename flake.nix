@@ -37,15 +37,38 @@
             start = with pkgs.vimPlugins; [
               lz-n
               plenary-nvim
-              oil-nvim
-              catppuccin-nvim
             ];
 
             # Anything that you're loading lazily should be put here
             opt = with pkgs.vimPlugins; [
+              oil-nvim
+              catppuccin-nvim
               telescope-nvim
               telescope-fzf-native-nvim
               telescope-ui-select-nvim
+              telescope-undo-nvim
+              mini-ai
+              mini-surround
+              mini-comment
+              mini-pairs
+              mini-indentscope
+              mini-statusline
+              gitsigns-nvim
+              nvim-web-devicons
+              render-markdown-nvim
+              todo-comments-nvim
+              avante-nvim
+              grug-far-nvim
+              neogit
+              nvim-treesitter
+              nvim-treesitter-context
+              nvim-treesitter-textobjects
+              nvim-lspconfig
+              fidget-nvim
+              blink-cmp
+              blink-cmp-avante
+              conform-nvim
+              which-key-nvim
             ];
 
             dev.myconfig = {
@@ -55,7 +78,7 @@
               impure =
                 # This is a hack it should be a absolute path
                 # here it'll only work from this directory
-                "/' .. vim.uv.cwd()  .. '/nvim";
+                "/home/adman/Projects/nvim/";
             };
           };
         };
