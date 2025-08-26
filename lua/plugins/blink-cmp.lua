@@ -15,12 +15,12 @@ return {
     "friendly-snippets",
   },
   {
-    "LuaSnip",
+    "luasnip",
     before = function()
       require("lz.n").trigger_load("friendly-snippets")
-      require("luasnip.loaders.from_vscode").lazy_load()
     end,
     after = function()
+      require("luasnip.loaders.from_vscode").lazy_load()
       require("luasnip").setup({
         history = true,
         delete_check_events = "TextChanged",

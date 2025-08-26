@@ -88,6 +88,9 @@
                 conform-nvim
                 which-key-nvim
                 none-ls-nvim
+                luasnip
+                friendly-snippets
+                lazydev-nvim
               ]
               ++ (attrValues {
                 inherit (pkgs.vimPlugins.nvim-treesitter) withAllGrammars;
