@@ -1,5 +1,5 @@
 local function get_theme()
-  return require("telescope.themes").get_ivy({
+  return require("telescope.themes").get_dropdown({
     layout_config = {
       preview_cutoff = 1,
       width = function(_, max_columns, _)

@@ -15,13 +15,30 @@
     ...
   }: let
     lib = nixpkgs.lib;
+    attrValues = lib.attrsets.attrValues;
   in {
     packages = lib.genAttrs lib.platforms.all (
       system: let
         pkgs = nixpkgs.legacyPackages.${system};
       in {
         default = mnw.lib.wrap pkgs {
+          appName = "nvim";
           neovim = neovim-nightly-overlay.packages.${system}.neovim;
+
+          extraBinPath = attrValues {
+            inherit
+              (pkgs)
+              lua-language-server
+              bash-language-server
+              marksman
+              deadnix
+              ripgrep
+              statix
+              nil
+              fzf
+              fd
+              ;
+          };
 
           # Creates a init.lua in the root level
           # lz.n is able to load from a module without init.lua
@@ -40,36 +57,41 @@
             ];
 
             # Anything that you're loading lazily should be put here
-            opt = with pkgs.vimPlugins; [
-              oil-nvim
-              catppuccin-nvim
-              telescope-nvim
-              telescope-fzf-native-nvim
-              telescope-ui-select-nvim
-              telescope-undo-nvim
-              mini-ai
-              mini-surround
-              mini-comment
-              mini-pairs
-              mini-indentscope
-              mini-statusline
-              gitsigns-nvim
-              nvim-web-devicons
-              render-markdown-nvim
-              todo-comments-nvim
-              avante-nvim
-              grug-far-nvim
-              neogit
-              nvim-treesitter
-              nvim-treesitter-context
-              nvim-treesitter-textobjects
-              nvim-lspconfig
-              fidget-nvim
-              blink-cmp
-              blink-cmp-avante
-              conform-nvim
-              which-key-nvim
-            ];
+            opt = with pkgs.vimPlugins;
+              [
+                oil-nvim
+                catppuccin-nvim
+                telescope-nvim
+                telescope-fzf-native-nvim
+                telescope-ui-select-nvim
+                telescope-undo-nvim
+                mini-ai
+                mini-surround
+                mini-comment
+                mini-pairs
+                mini-indentscope
+                mini-statusline
+                gitsigns-nvim
+                nvim-web-devicons
+                render-markdown-nvim
+                todo-comments-nvim
+                avante-nvim
+                grug-far-nvim
+                neogit
+                nvim-treesitter
+                nvim-treesitter-context
+                nvim-treesitter-textobjects
+                nvim-lspconfig
+                fidget-nvim
+                blink-cmp
+                blink-cmp-avante
+                conform-nvim
+                which-key-nvim
+                none-ls-nvim
+              ]
+              ++ (attrValues {
+                inherit (pkgs.vimPlugins.nvim-treesitter) withAllGrammars;
+              });
 
             dev.myconfig = {
               # you can use lib.fileset to reduce rebuilds here
