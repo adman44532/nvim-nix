@@ -91,6 +91,7 @@
                 luasnip
                 friendly-snippets
                 lazydev-nvim
+                  tiny-inline-diagnostic-nvim
               ]
               ++ (attrValues {
                 inherit (pkgs.vimPlugins.nvim-treesitter) withAllGrammars;

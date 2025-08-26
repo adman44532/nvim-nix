@@ -1,11 +1,22 @@
 return {
   { "none-ls.nvim" },
   {
+  'tiny-inline-diagnostic.nvim',
+  priority = 1000, -- needs to be loaded in first
+  after = function()
+    require('tiny-inline-diagnostic').setup {
+      preset = 'classic',
+    }
+    vim.diagnostic.config { virtual_text = false } -- Only if needed in your configuration, if you already have native LSP diagnostics
+  end,
+},
+  {
     "nvim-lspconfig",
     lazy = false,
     before = function()
       require("lz.n").trigger_load("none-ls.nvim")
       require("lz.n").trigger_load("blink.cmp")
+      require("lz.n").trigger_load("tiny-inline-diagnostic")
     end,
     binds = {
       {
