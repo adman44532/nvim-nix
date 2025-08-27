@@ -1,21 +1,21 @@
 return {
-  { "none-ls.nvim" },
+  { "none-ls.nvim", priority = 1000 },
   {
-  'tiny-inline-diagnostic.nvim',
-  priority = 1000, -- needs to be loaded in first
-  after = function()
-    require('tiny-inline-diagnostic').setup {
-      preset = 'classic',
-    }
-    vim.diagnostic.config { virtual_text = false } -- Only if needed in your configuration, if you already have native LSP diagnostics
-  end,
-},
+    'tiny-inline-diagnostic.nvim',
+    priority = 1000, -- needs to be loaded in first
+    after = function()
+      require('tiny-inline-diagnostic').setup {
+        preset = 'classic',
+      }
+      vim.diagnostic.config { virtual_text = false } -- Only if needed in your configuration, if you already have native LSP diagnostics
+    end,
+  },
   {
     "nvim-lspconfig",
     lazy = false,
     before = function()
-      require("lz.n").trigger_load("none-ls.nvim")
       require("lz.n").trigger_load("blink.cmp")
+      require("lz.n").trigger_load("none-ls.nvim")
       require("lz.n").trigger_load("tiny-inline-diagnostic")
     end,
     binds = {
@@ -80,7 +80,7 @@ return {
       local formatting = nonels.builtins.formatting
 
       local ls_sources = {
-        formatting.sylua,
+        formatting.stylua,
         formatting.alejandra,
         diagnostics.statix,
         code_actions.statix,

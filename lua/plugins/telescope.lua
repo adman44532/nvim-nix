@@ -12,19 +12,19 @@ local function get_theme()
   })
 end
 return {
-  { "telescope-fzf-native.nvim" },
-  { "telescope-undo.nvim" },
-  { "telescope-ui-select.nvim" },
+  { "telescope-fzf-native.nvim", priority = 1000 },
+  { "telescope-undo.nvim",       priority = 1000 },
+  { "telescope-ui-select.nvim",  priority = 1000 },
   {
     "telescope.nvim",
     before = function()
       require("lz.n").trigger_load("telescope-undo.nvim")
       require("lz.n").trigger_load("telescope-fzf-native.nvim")
+      require("lz.n").trigger_load("telescope-ui-select.nvim")
+      require("lz.n").trigger_load("nvim-web-devicons")
     end,
     after = function()
       local telescope = require('telescope')
-      telescope.load_extension("fzf")
-      telescope.load_extension("ui-select")
       telescope.setup({
         pickers = {
           theme = "ivy",
@@ -34,14 +34,24 @@ return {
         },
         extensions = {
           ["ui-select"] = {
-            require("telescope.themes").get_dropdown(),
+            get_theme(),
           },
           undo = {
             use_delta = true,
             side_by_side = true,
+          },
+          fzf = {
+            fuzzy = true,                   -- false will only do exact matching
+            override_generic_sorter = true, -- override the generic sorter
+            override_file_sorter = true,    -- override the file sorter
+            case_mode = "smart_case",       -- or "ignore_case" or "respect_case"
+            -- the default case_mode is "smart_case"
           }
         },
       })
+      telescope.load_extension("ui-select")
+      telescope.load_extension("fzf")
+      telescope.load_extension('undo')
     end,
     cmd = "Telescope",
     keys = {

@@ -1,10 +1,10 @@
 {
-  description = "A Neovim Flake";
-
+  description = "My Universal Neovim Configuration";
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
     mnw.url = "github:Gerg-L/mnw";
     neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
+    mcphub.url = "github:ravitemer/mcphub.nvim";
   };
 
   outputs = {
@@ -12,10 +12,11 @@
     nixpkgs,
     mnw,
     neovim-nightly-overlay,
+    mcphub,
     ...
   }: let
-    lib = nixpkgs.lib;
-    attrValues = lib.attrsets.attrValues;
+    inherit (nixpkgs) lib;
+    inherit (lib.attrsets) attrValues;
   in {
     packages = lib.genAttrs lib.platforms.all (
       system: let
@@ -23,11 +24,12 @@
       in {
         default = mnw.lib.wrap pkgs {
           appName = "nvim";
-          neovim = neovim-nightly-overlay.packages.${system}.neovim;
+          inherit (neovim-nightly-overlay.packages.${system}) neovim;
 
           extraBinPath = attrValues {
             inherit
               (pkgs)
+              stylua
               lua-language-server
               bash-language-server
               marksman
@@ -37,6 +39,7 @@
               nil
               fzf
               fd
+              shfmt
               ;
           };
 
@@ -91,9 +94,10 @@
                 luasnip
                 friendly-snippets
                 lazydev-nvim
-                  tiny-inline-diagnostic-nvim
-                  diffview-nvim
+                tiny-inline-diagnostic-nvim
+                diffview-nvim
               ]
+              ++ [mcphub.packages.${system}.default]
               ++ (attrValues {
                 inherit (pkgs.vimPlugins.nvim-treesitter) withAllGrammars;
               });
