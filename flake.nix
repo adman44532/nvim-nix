@@ -92,6 +92,7 @@
                 friendly-snippets
                 lazydev-nvim
                   tiny-inline-diagnostic-nvim
+                  diffview-nvim
               ]
               ++ (attrValues {
                 inherit (pkgs.vimPlugins.nvim-treesitter) withAllGrammars;
