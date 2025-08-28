@@ -1,44 +1,44 @@
 return {
   {
-    'mini.ai',
+    "mini.ai",
     lazy = false,
-    after = function ()
-      require('mini.ai').setup({n_lines = 500})
-    end
+    after = function()
+      require("mini.ai").setup({ n_lines = 500 })
+    end,
   },
   {
-    'mini.surround',
+    "mini.surround",
     lazy = false,
-    after = function ()
-      require('mini.surround').setup()
-    end
+    after = function()
+      require("mini.surround").setup()
+    end,
   },
   {
-    'mini.comment',
+    "mini.comment",
     lazy = false,
-    after = function ()
-      require('mini.comment').setup()
-    end
+    after = function()
+      require("mini.comment").setup()
+    end,
   },
   {
-    'mini.pairs',
+    "mini.pairs",
     lazy = false,
-    after = function ()
-      require('mini.pairs').setup()
-    end
+    after = function()
+      require("mini.pairs").setup()
+    end,
   },
   {
-    'mini.indentscope',
+    "mini.indentscope",
     lazy = false,
-    after = function ()
-      require('mini.indentscope').setup()
-    end
+    after = function()
+      require("mini.indentscope").setup()
+    end,
   },
   {
-    'mini.statusline',
+    "mini.statusline",
     lazy = false,
-    after = function ()
-      require('mini.statusline').setup()
-    end
+    after = function()
+      require("mini.statusline").setup()
+    end,
   },
 }

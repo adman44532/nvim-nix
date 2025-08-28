@@ -4,7 +4,8 @@
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
     mnw.url = "github:Gerg-L/mnw";
     neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
-    mcphub.url = "github:ravitemer/mcphub.nvim";
+    mcp-hub.url = "github:ravitemer/mcp-hub";
+    mcp-hub-nvim.url = "github:ravitemer/mcphub.nvim";
   };
 
   outputs = {
@@ -12,7 +13,8 @@
     nixpkgs,
     mnw,
     neovim-nightly-overlay,
-    mcphub,
+    mcp-hub,
+    mcp-hub-nvim,
     ...
   }: let
     inherit (nixpkgs) lib;
@@ -41,6 +43,7 @@
               fd
               shfmt
               ;
+              mcp-hub = mcp-hub.packages.${system}.default;
           };
 
           # Creates a init.lua in the root level
@@ -97,7 +100,7 @@
                 tiny-inline-diagnostic-nvim
                 diffview-nvim
               ]
-              ++ [mcphub.packages.${system}.default]
+              ++ [mcp-hub-nvim.packages.${system}.default]
               ++ (attrValues {
                 inherit (pkgs.vimPlugins.nvim-treesitter) withAllGrammars;
               });
