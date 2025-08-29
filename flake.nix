@@ -27,6 +27,11 @@
         default = mnw.lib.wrap pkgs {
           appName = "nvim";
           inherit (neovim-nightly-overlay.packages.${system}) neovim;
+          meta = {
+            description = "Custom Neovim with my universal configuration";
+            longDescription = "Neovim configured with my flake setup, plugins, and custom options.";
+            license = pkgs.lib.licenses.mit;
+          };
 
           extraBinPath = attrValues {
             inherit
