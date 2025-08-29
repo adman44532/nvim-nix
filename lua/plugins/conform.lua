@@ -2,7 +2,7 @@ return {
   "conform.nvim",
   event = { "BufWritePre" },
   cmd = { "ConformInfo" },
-  keys = {
+  binds = {
     {
       "<leader>f",
       function()

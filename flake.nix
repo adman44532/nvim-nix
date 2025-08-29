@@ -43,13 +43,16 @@
               fd
               shfmt
               ;
-              mcp-hub = mcp-hub.packages.${system}.default;
+            mcp-hub = mcp-hub.packages.${system}.default;
           };
+
+          providers.nodeJs.enable = true;
 
           # Creates a init.lua in the root level
           # lz.n is able to load from a module without init.lua
           initLua = ''
             require('config.options')
+            require('lz.n').register_handler(require('handlers.which-key'))
             require('config.keybinds')
             require('config.autocmds')
             require('lz.n').load('plugins')
@@ -59,7 +62,9 @@
           plugins = {
             start = with pkgs.vimPlugins; [
               lz-n
+              which-key-nvim
               plenary-nvim
+              nui-nvim
             ];
 
             # Anything that you're loading lazily should be put here
@@ -92,13 +97,13 @@
                 blink-cmp
                 blink-cmp-avante
                 conform-nvim
-                which-key-nvim
                 none-ls-nvim
                 luasnip
                 friendly-snippets
                 lazydev-nvim
                 tiny-inline-diagnostic-nvim
                 diffview-nvim
+                copilot-lua
               ]
               ++ [mcp-hub-nvim.packages.${system}.default]
               ++ (attrValues {

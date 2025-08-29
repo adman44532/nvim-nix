@@ -54,7 +54,7 @@ return {
       telescope.load_extension('undo')
     end,
     cmd = "Telescope",
-    keys = {
+    binds = {
       { '<leader>sh',       function() require('telescope.builtin').help_tags(get_theme()) end,   desc = '[S]earch [H]elp' },
       { '<leader>sk',       function() require('telescope.builtin').keymaps(get_theme()) end,     desc = '[S]earch [K]eymaps' },
       { '<leader>sf',       function() require('telescope.builtin').find_files(get_theme()) end,  desc = '[S]earch [F]iles' },
