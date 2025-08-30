@@ -1,13 +1,13 @@
 return {
   { "none-ls.nvim", priority = 1000 },
   {
-    'tiny-inline-diagnostic.nvim',
+    "tiny-inline-diagnostic.nvim",
     priority = 1000, -- needs to be loaded in first
     after = function()
-      require('tiny-inline-diagnostic').setup {
-        preset = 'classic',
-      }
-      vim.diagnostic.config { virtual_text = false } -- Only if needed in your configuration, if you already have native LSP diagnostics
+      require("tiny-inline-diagnostic").setup({
+        preset = "classic",
+      })
+      vim.diagnostic.config({ virtual_text = false }) -- Only if needed in your configuration, if you already have native LSP diagnostics
     end,
   },
   {
@@ -102,7 +102,9 @@ return {
           on_init = function(client)
             if client.workspace_folders then
               local path = client.workspace_folders[1].name
-              if vim.uv.fs_stat(path .. "/.luarc.json") or vim.uv.fs_stat(path .. "/.luarrc.jsonc") then
+              if
+                vim.uv.fs_stat(path .. "/.luarc.json") or vim.uv.fs_stat(path .. "/.luarrc.jsonc")
+              then
                 return
               end
             end
@@ -154,7 +156,8 @@ return {
           },
         },
         ts_ls = {},
-        pyright = {},
+        ty = {},
+        ruff = {},
         texlab = {},
         yamlls = {},
         bashls = {},
@@ -164,9 +167,10 @@ return {
       }
 
       for server_name, server_config in pairs(servers) do
-        server_config.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server_config.capabilities or {})
+        server_config.capabilities =
+          vim.tbl_deep_extend("force", {}, capabilities, server_config.capabilities or {})
         lspconfig[server_name].setup(server_config)
       end
-    end
-  }
+    end,
+  },
 }
