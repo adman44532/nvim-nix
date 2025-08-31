@@ -156,6 +156,7 @@ return {
           },
         },
         ts_ls = {},
+        eslint = {},
         ty = {},
         ruff = {},
         texlab = {},
