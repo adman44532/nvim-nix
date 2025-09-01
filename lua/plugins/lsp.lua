@@ -58,7 +58,7 @@ return {
         {
           "gra",
           function()
-            vim.lsb.buf.code_action()
+            vim.lsp.buf.code_action()
           end,
           desc = "Actions",
         },
