@@ -170,7 +170,7 @@ return {
             })
           end,
         },
-        ty = {},
+        -- ty = {}, -- Not in config.md apparently
         ruff = {},
         texlab = {},
         yamlls = {},
