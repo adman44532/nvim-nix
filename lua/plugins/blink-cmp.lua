@@ -6,7 +6,7 @@ return {
       require("lazydev").setup({
         library = {
           { path = "${3rd}/luv/library", words = { "vim%.uv" } },
-          { path = "wezterm-types",      mods = { "wezterm" } },
+          { path = "wezterm-types", mods = { "wezterm" } },
         },
       })
     end,
@@ -31,10 +31,14 @@ return {
     end,
   },
   {
+    "blink-cmp-avante",
+  },
+  {
     "blink.cmp",
     event = "DeferredUIEnter",
     before = function()
-      require("lz.n").trigger_load('lazydev.nvim')
+      require("lz.n").trigger_load("blink-cmp-avante")
+      require("lz.n").trigger_load("lazydev.nvim")
     end,
     after = function()
       require("blink-cmp").setup({
@@ -46,7 +50,7 @@ return {
         },
         completion = {
           ghost_text = {
-            enabled = true,
+            enabled = false,
           },
           menu = {},
           documentation = {
@@ -59,6 +63,7 @@ return {
         },
         sources = {
           default = {
+            "avante",
             "lazydev",
             "lsp",
             "path",
@@ -70,6 +75,13 @@ return {
               name = "LazyDev",
               module = "lazydev.integrations.blink",
               score_offset = 100,
+            },
+            avante = {
+              module = "blink-cmp-avante",
+              name = "Avante",
+              opts = {
+                -- options for blink-cmp-avante
+              },
             },
           },
         },
