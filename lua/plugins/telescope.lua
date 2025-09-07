@@ -73,7 +73,7 @@ return {
         pickers = {
           theme = "ivy",
           find_files = {
-            hidden = true,
+            hidden = false,
           },
         },
         extensions = {
