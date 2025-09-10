@@ -94,7 +94,6 @@ return {
         sources = ls_sources,
       })
 
-      local lspconfig = require("lspconfig")
       local capabilities = require("blink.cmp").get_lsp_capabilities()
 
       local base_on_attach = vim.lsp.config.eslint.on_attach
@@ -170,7 +169,7 @@ return {
             })
           end,
         },
-        -- ty = {}, -- Not in config.md apparently
+        ty = {},
         ruff = {},
         texlab = {},
         yamlls = {},
@@ -183,7 +182,8 @@ return {
       for server_name, server_config in pairs(servers) do
         server_config.capabilities =
           vim.tbl_deep_extend("force", {}, capabilities, server_config.capabilities or {})
-        lspconfig[server_name].setup(server_config)
+        vim.lsp.config(server_name, server_config) -- register config
+        vim.lsp.enable(server_name) -- enable server
       end
     end,
   },
