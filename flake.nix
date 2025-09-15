@@ -104,6 +104,7 @@
                 tiny-inline-diagnostic-nvim
                 diffview-nvim
                 copilot-lua
+                typescript-tools-nvim
               ]
               ++ [mcp-hub-nvim.packages.${system}.default]
               ++ (attrValues {

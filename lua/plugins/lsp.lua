@@ -11,6 +11,16 @@ return {
     end,
   },
   {
+    "typescript-tools.nvim",
+    ft = { "typescript", "typescriptreact" },
+    before = function()
+      require("lz.n").trigger_load("nvim-lspconfig")
+    end,
+    after = function()
+      require("typescript-tools").setup({})
+    end,
+  },
+  {
     "nvim-lspconfig",
     lazy = false,
     before = function()
@@ -155,20 +165,7 @@ return {
             },
           },
         },
-        ts_ls = {},
-        eslint = {
-          on_attach = function(client, bufnr)
-            if not base_on_attach then
-              return
-            end
-
-            base_on_attach(client, bufnr)
-            vim.api.nvim_create_autocmd("BufWritePre", {
-              buffer = bufnr,
-              command = "LspEslintFixAll",
-            })
-          end,
-        },
+        eslint = {},
         ty = {},
         ruff = {},
         texlab = {},
