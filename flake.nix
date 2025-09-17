@@ -34,6 +34,7 @@
               stylua
               lua-language-server
               bash-language-server
+              yaml-language-server
               marksman
               deadnix
               ripgrep
@@ -42,6 +43,7 @@
               fzf
               fd
               shfmt
+              xclip
               ;
             mcp-hub = mcp-hub.packages.${system}.default;
           };
