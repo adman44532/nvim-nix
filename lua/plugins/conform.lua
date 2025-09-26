@@ -52,7 +52,7 @@ return {
         css = { "prettierd", "prettier", stop_after_first = true },
         html = { "prettierd", "prettier", stop_after_first = true },
         nix = { "alejandra" },
-        python = { "black" },
+        python = { "ruff", "black", stop_after_first = true },
         rust = { "rustfmt" },
         markdown = { "prettierd", "prettier", stop_after_first = true },
         yaml = { "prettierd", "prettier", stop_after_first = true },

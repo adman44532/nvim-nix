@@ -154,7 +154,7 @@ return {
                 binary = "nix",
                 maxMemoryMB = nil,
                 flake = {
-                  autoEvalInputs = false, -- Fullscreen errors? no.
+                  autoEvalInputs = false,
                   autoArchive = false,
                   nixpkgsInputName = nil,
                 },
@@ -168,6 +168,18 @@ return {
         eslint = {},
         ty = {},
         ruff = {},
+        pyright = {
+          settings = {
+            python = {
+              analysis = {
+                typeCheckingMode = "off",
+                autoSearchPaths = true,
+                useLibraryCodeForTypes = true,
+                diagnosticMode = "openFilesOnly",
+              },
+            },
+          },
+        },
         texlab = {},
         yamlls = {},
         bashls = {},

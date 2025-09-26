@@ -28,12 +28,16 @@
           appName = "nvim";
           inherit (neovim-nightly-overlay.packages.${system}) neovim;
 
+          providers.nodeJs.enable = true;
+
           extraBinPath = attrValues {
             inherit
               (pkgs)
               stylua
               lua-language-server
               bash-language-server
+              yaml-language-server
+              prettierd
               marksman
               deadnix
               ripgrep
@@ -42,11 +46,10 @@
               fzf
               fd
               shfmt
+              xclip
               ;
             mcp-hub = mcp-hub.packages.${system}.default;
           };
-
-          providers.nodeJs.enable = true;
 
           # Creates a init.lua in the root level
           # lz.n is able to load from a module without init.lua
@@ -105,6 +108,7 @@
                 diffview-nvim
                 copilot-lua
                 typescript-tools-nvim
+                tailwind-tools-nvim
               ]
               ++ [mcp-hub-nvim.packages.${system}.default]
               ++ (attrValues {
@@ -118,7 +122,7 @@
               impure =
                 # This is a hack it should be a absolute path
                 # here it'll only work from this directory
-                "/home/adman/Projects/nvim/";
+                "/home/adman/Projects/nvim-nix/";
             };
           };
         };
