@@ -31,6 +31,7 @@
           providers.nodeJs.enable = true;
 
           extraBinPath = attrValues {
+            # LSP
             inherit
               (pkgs)
               alejandra
@@ -38,17 +39,32 @@
               lua-language-server
               bash-language-server
               yaml-language-server
-              prettierd
+              vscode-langservers-extracted
+              fish-lsp
               marksman
+              ;
+
+            # Linters
+            inherit
+              (pkgs)
+              stylua
+              alejandra
+              prettierd
               deadnix
-              ripgrep
               statix
+              shfmt
+              ;
+
+            # Utils
+            inherit
+              (pkgs)
+              ripgrep
               nil
               fzf
               fd
-              shfmt
               xclip
               ;
+
             mcp-hub = mcp-hub.packages.${system}.default;
           };
 
