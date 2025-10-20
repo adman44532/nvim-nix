@@ -70,6 +70,14 @@ return {
     after = function()
       local telescope = require("telescope")
       telescope.setup({
+        mappings = {
+          i = {
+            ["<C-d>"] = require("telescope.actions").delete_buffer,
+          },
+          n = {
+            ["<C-d>"] = require("telescope.actions").delete_buffer,
+          },
+        },
         pickers = {
           theme = "ivy",
           find_files = {
