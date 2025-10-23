@@ -33,6 +33,7 @@
           extraBinPath = attrValues {
             inherit
               (pkgs)
+              alejandra
               stylua
               lua-language-server
               bash-language-server
@@ -109,6 +110,7 @@
                 copilot-lua
                 typescript-tools-nvim
                 tailwind-tools-nvim
+                ccc-nvim
               ]
               ++ [mcp-hub-nvim.packages.${system}.default]
               ++ (attrValues {

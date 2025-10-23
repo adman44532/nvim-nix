@@ -146,6 +146,18 @@ return {
             Lua = {},
           },
         },
+        tailwindcss = {
+          settings = {
+            tailwindCSS = {
+              experimental = {
+                classRegex = {
+                  "clsx%(([^)]*)%)",
+                  "cva%(([^)]*)%)",
+                },
+              },
+            },
+          },
+        },
         nil_ls = {
           cmd = { "nil" },
           settings = {
