@@ -2,12 +2,12 @@ return {
   { "none-ls.nvim", priority = 1000 },
   {
     "tiny-inline-diagnostic.nvim",
-    priority = 1000, -- needs to be loaded in first
+    priority = 1000,
     after = function()
       require("tiny-inline-diagnostic").setup({
         preset = "classic",
       })
-      vim.diagnostic.config({ virtual_text = false }) -- Only if needed in your configuration, if you already have native LSP diagnostics
+      vim.diagnostic.config({ virtual_text = false })
     end,
   },
   {
@@ -17,6 +17,8 @@ return {
       require("lz.n").trigger_load("nvim-lspconfig")
     end,
     after = function()
+      -- typescript-tools still uses its own setup method
+      -- It's compatible with the new LSP system
       require("typescript-tools").setup({})
     end,
   },
@@ -28,63 +30,9 @@ return {
       require("lz.n").trigger_load("none-ls.nvim")
       require("lz.n").trigger_load("tiny-inline-diagnostic")
     end,
-    binds = {
-      {
-        {
-          "grd",
-          function()
-            vim.lsp.buf.definition()
-          end,
-          desc = "Goto Definition",
-        },
-        {
-          "grD",
-          function()
-            vim.lsp.buf.declaration()
-          end,
-          desc = "Goto Declaration",
-        },
-        {
-          "grr",
-          function()
-            vim.lsp.buf.references()
-          end,
-          desc = "Goto References",
-        },
-        {
-          "gri",
-          function()
-            vim.lsp.buf.implementation()
-          end,
-          desc = "Goto Implementations",
-        },
-        {
-          "grt",
-          function()
-            vim.lsp.buf.type_definition()
-          end,
-          desc = "Goto Implementations",
-        },
-        {
-          "gra",
-          function()
-            vim.lsp.buf.code_action()
-          end,
-          desc = "Actions",
-        },
-        {
-          "grn",
-          function()
-            vim.lsp.buf.rename()
-          end,
-          desc = "Rename",
-        },
-      },
-    },
     after = function()
-      -- Setup NoneLS, basically a default LS incase another one isn't there
+      -- Setup NoneLS
       local nonels = require("null-ls")
-
       local code_actions = nonels.builtins.code_actions
       local diagnostics = nonels.builtins.diagnostics
       local formatting = nonels.builtins.formatting
@@ -104,16 +52,23 @@ return {
         sources = ls_sources,
       })
 
+      -- Get capabilities from blink.cmp
       local capabilities = require("blink.cmp").get_lsp_capabilities()
 
-      local base_on_attach = vim.lsp.config.eslint.on_attach
+      -- Configure global LSP settings (applies to all servers)
+      vim.lsp.config("*", {
+        capabilities = capabilities,
+      })
+
+      -- Server-specific configurations
       local servers = {
         lua_ls = {
           on_init = function(client)
             if client.workspace_folders then
               local path = client.workspace_folders[1].name
               if
-                vim.uv.fs_stat(path .. "/.luarc.json") or vim.uv.fs_stat(path .. "/.luarrc.jsonc")
+                vim.uv.fs_stat(path .. "/.luarc.json")
+                or vim.uv.fs_stat(path .. "/.luarrc.jsonc")
               then
                 return
               end
@@ -200,11 +155,17 @@ return {
         jsonls = {},
       }
 
+      -- Register and enable each server
       for server_name, server_config in pairs(servers) do
+        -- Merge capabilities with server-specific config
         server_config.capabilities =
           vim.tbl_deep_extend("force", {}, capabilities, server_config.capabilities or {})
-        vim.lsp.config(server_name, server_config) -- register config
-        vim.lsp.enable(server_name) -- enable server
+
+        -- Register the server configuration
+        vim.lsp.config(server_name, server_config)
+
+        -- Enable the server
+        vim.lsp.enable(server_name)
       end
     end,
   },
