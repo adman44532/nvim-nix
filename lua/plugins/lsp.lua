@@ -12,7 +12,7 @@ return {
   },
   {
     "typescript-tools.nvim",
-    ft = { "typescript", "typescriptreact" },
+    ft = { "typescript", "typescriptreact", "javascript", "javascriptreact" },
     before = function()
       require("lz.n").trigger_load("nvim-lspconfig")
     end,
