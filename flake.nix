@@ -34,8 +34,6 @@
             # LSP
             inherit
               (pkgs)
-              alejandra
-              stylua
               lua-language-server
               bash-language-server
               yaml-language-server
