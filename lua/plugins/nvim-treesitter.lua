@@ -38,17 +38,4 @@ return {
       })
     end,
   },
-  {
-    "nvim-treesitter-textobjects",
-    event = "DeferredUIEnter",
-    before = function()
-      require("lz.n").trigger_load("nvim-treesitter")
-    end,
-    after = function()
-      require("nvim-treesitter.configs").setup({
-        textobjects = {},
-      })
-    end,
-    binds = {},
-  },
 }

@@ -104,16 +104,13 @@
                 nvim-web-devicons
                 render-markdown-nvim
                 todo-comments-nvim
-                avante-nvim
                 grug-far-nvim
                 neogit
                 nvim-treesitter
                 nvim-treesitter-context
-                nvim-treesitter-textobjects
                 nvim-lspconfig
                 fidget-nvim
                 blink-cmp
-                blink-cmp-avante
                 conform-nvim
                 none-ls-nvim
                 luasnip
@@ -121,10 +118,11 @@
                 lazydev-nvim
                 tiny-inline-diagnostic-nvim
                 diffview-nvim
-                copilot-lua
                 typescript-tools-nvim
                 tailwind-tools-nvim
                 ccc-nvim
+                opencode-nvim
+                minuet-ai-nvim
               ]
               ++ [mcp-hub-nvim.packages.${system}.default]
               ++ (attrValues {

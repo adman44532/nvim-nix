@@ -31,13 +31,9 @@ return {
     end,
   },
   {
-    "blink-cmp-avante",
-  },
-  {
     "blink.cmp",
     event = "DeferredUIEnter",
     before = function()
-      require("lz.n").trigger_load("blink-cmp-avante")
       require("lz.n").trigger_load("lazydev.nvim")
     end,
     after = function()
@@ -63,12 +59,12 @@ return {
         },
         sources = {
           default = {
-            "avante",
             "lazydev",
             "lsp",
             "path",
             "snippets",
             "buffer",
+            "minuet",
           },
           providers = {
             lazydev = {
@@ -76,12 +72,10 @@ return {
               module = "lazydev.integrations.blink",
               score_offset = 100,
             },
-            avante = {
-              module = "blink-cmp-avante",
-              name = "Avante",
-              opts = {
-                -- options for blink-cmp-avante
-              },
+            minuet = {
+              name = "Minuet",
+              module = "minuet.blink",
+              score_offset = 100,
             },
           },
         },
