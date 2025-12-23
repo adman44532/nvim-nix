@@ -61,6 +61,7 @@
               fzf
               fd
               xclip
+              lsof
               ;
 
             mcp-hub = mcp-hub.packages.${system}.default;

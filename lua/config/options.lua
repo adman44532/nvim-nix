@@ -84,3 +84,6 @@ vim.o.scrolloff = 10
 -- instead raise a dialog asking if you wish to save the current file(s)
 -- See `:help 'confirm'`
 vim.o.confirm = true
+
+-- Ensure ShaDa persists global variables for secret storage and registers (for secret fallbacks)
+vim.opt.shada:append("!")
