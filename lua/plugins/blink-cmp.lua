@@ -38,6 +38,7 @@ return {
     end,
     after = function()
       require("blink-cmp").setup({
+        snippets = { preset = "luasnip" },
         signature = {
           enabled = true,
           window = {
@@ -48,7 +49,23 @@ return {
           ghost_text = {
             enabled = false,
           },
-          menu = {},
+          menu = {
+            draw = {
+              columns = {
+                { "label", "label_description", gap = 1 },
+                { "kind_icon", "kind", gap = 1 },
+                { "source_name" },
+              },
+              components = {
+                source_name = {
+                  text = function(ctx)
+                    return "[" .. ctx.source_name .. "]"
+                  end,
+                  highlight = "BlinkCmpSource",
+                },
+              },
+            },
+          },
           documentation = {
             auto_show = true,
             auto_show_delay_ms = 300,
@@ -63,8 +80,6 @@ return {
             "lsp",
             "path",
             "snippets",
-            "buffer",
-            "minuet",
           },
           providers = {
             lazydev = {
@@ -72,10 +87,25 @@ return {
               module = "lazydev.integrations.blink",
               score_offset = 100,
             },
-            minuet = {
-              name = "Minuet",
-              module = "minuet.blink",
-              score_offset = 100,
+            lsp = {
+              name = "LSP",
+              module = "blink.cmp.sources.lsp",
+              fallbacks = { "buffer" },
+            },
+            snippets = {
+              name = "Snippets",
+              module = "blink.cmp.sources.snippets",
+              opts = { use_label_description = true },
+            },
+            path = {
+              name = "Path",
+              module = "blink.cmp.sources.path",
+              score_offset = 3,
+            },
+            buffer = {
+              name = "Buffer",
+              module = "blink.cmp.sources.buffer",
+              score_offset = -3,
             },
           },
         },
