@@ -2,18 +2,14 @@ return {
   {
     "opencode.nvim",
     event = "DeferredUIEnter",
-    after = function()
+    before = function()
       vim.g.opencode_opts = {
         provider = {
-          enabled = "terminal",
-          terminal = {
-            split = "right",
-            width = math.floor(vim.o.columns * 0.35),
-          },
+          enabled = "snacks",
         },
       }
-      vim.o.autoread = true
-
+    end,
+    after = function()
       vim.keymap.set({ "n", "x" }, "<leader>oa", function()
         require("opencode").ask("@this:  ", { submit = true })
       end, { desc = "Ask opencode" })

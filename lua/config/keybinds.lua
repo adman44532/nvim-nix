@@ -7,8 +7,8 @@ wk.add({
   -- Clear search highlights
   { "<Esc>", "<cmd>nohlsearch<CR>", desc = "Clear search highlights", icon = "🔍" },
 
-  -- Diagnostics group
-  { "<leader>d", vim.diagnostic.open_float, desc = "Show [d]iagnostic popup", icon = "⚠️" },
+  -- Diagnostics (moved to <leader>x for "eXamine")
+  { "<leader>x", vim.diagnostic.open_float, desc = "Show diagnostic popup", icon = "⚠️" },
   {
     "<leader>q",
     vim.diagnostic.setloclist,
@@ -30,6 +30,108 @@ wk.add({
     end,
     desc = "Go to next [d]iagnostic",
     icon = "⬇️",
+  },
+
+  -- Debug (DAP)
+  { "<leader>d", group = "[D]ebug", icon = "🐛" },
+  {
+    "<leader>db",
+    function()
+      require("lz.n").trigger_load("nvim-dap")
+      require("dap").toggle_breakpoint()
+    end,
+    desc = "Toggle [b]reakpoint",
+  },
+  {
+    "<leader>dB",
+    function()
+      require("lz.n").trigger_load("nvim-dap")
+      require("dap").set_breakpoint(vim.fn.input("Breakpoint condition: "))
+    end,
+    desc = "Conditional [B]reakpoint",
+  },
+  {
+    "<leader>dc",
+    function()
+      require("lz.n").trigger_load("nvim-dap")
+      require("dap").continue()
+    end,
+    desc = "[c]ontinue / Start",
+  },
+  {
+    "<leader>di",
+    function()
+      require("lz.n").trigger_load("nvim-dap")
+      require("dap").step_into()
+    end,
+    desc = "Step [i]nto",
+  },
+  {
+    "<leader>do",
+    function()
+      require("lz.n").trigger_load("nvim-dap")
+      require("dap").step_over()
+    end,
+    desc = "Step [o]ver",
+  },
+  {
+    "<leader>dO",
+    function()
+      require("lz.n").trigger_load("nvim-dap")
+      require("dap").step_out()
+    end,
+    desc = "Step [O]ut",
+  },
+  {
+    "<leader>dr",
+    function()
+      require("lz.n").trigger_load("nvim-dap")
+      require("dap").repl.toggle()
+    end,
+    desc = "Toggle [r]EPL",
+  },
+  {
+    "<leader>dl",
+    function()
+      require("lz.n").trigger_load("nvim-dap")
+      require("dap").run_last()
+    end,
+    desc = "Run [l]ast",
+  },
+  {
+    "<leader>du",
+    function()
+      require("lz.n").trigger_load("nvim-dap-ui")
+      require("dapui").toggle()
+    end,
+    desc = "Toggle DAP [U]I",
+  },
+  {
+    "<leader>dt",
+    function()
+      require("lz.n").trigger_load("nvim-dap")
+      require("dap").terminate()
+    end,
+    desc = "[t]erminate session",
+  },
+  {
+    "<leader>dh",
+    function()
+      require("lz.n").trigger_load("nvim-dap-ui")
+      require("dapui").eval()
+    end,
+    desc = "Eval under cursor ([h]over)",
+    mode = { "n", "v" },
+  },
+
+  -- LSP
+  { "<leader>l", group = "[L]SP", icon = "🔧" },
+  {
+    "<leader>lh",
+    function()
+      vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
+    end,
+    desc = "Toggle inlay [h]ints",
   },
 
   -- File management

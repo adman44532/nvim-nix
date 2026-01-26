@@ -1,36 +1,5 @@
 return {
   {
-    "lazydev.nvim",
-    ft = "lua",
-    after = function()
-      require("lazydev").setup({
-        library = {
-          { path = "${3rd}/luv/library", words = { "vim%.uv" } },
-          { path = "wezterm-types", mods = { "wezterm" } },
-        },
-      })
-    end,
-  },
-  {
-    "friendly-snippets",
-  },
-  {
-    "luasnip",
-    before = function()
-      require("lz.n").trigger_load("friendly-snippets")
-    end,
-    after = function()
-      require("luasnip.loaders.from_vscode").lazy_load()
-      require("luasnip").setup({
-        history = true,
-        delete_check_events = "TextChanged",
-        keys = function()
-          return {}
-        end,
-      })
-    end,
-  },
-  {
     "blink.cmp",
     event = "DeferredUIEnter",
     before = function()
@@ -38,7 +7,6 @@ return {
     end,
     after = function()
       require("blink-cmp").setup({
-        snippets = { preset = "luasnip" },
         signature = {
           enabled = true,
           window = {

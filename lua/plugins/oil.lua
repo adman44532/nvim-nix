@@ -6,10 +6,10 @@ return {
     vim.cmd([[packadd oil.nvim]])
   end,
   before = function()
-    require("lz.n").trigger_load('nvim-web-devicons')
+    require("lz.n").trigger_load("mini.icons")
   end,
   after = function()
     require("oil").setup()
-    vim.keymap.set('n', '-', '<CMD>Oil<CR>', { desc = 'Open parent directory' })
-  end
+    vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
+  end,
 }
