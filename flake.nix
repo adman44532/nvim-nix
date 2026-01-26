@@ -79,56 +79,41 @@
 
           # Aims to mirror Neovim's default plugin setup, but allows us to provide the binaries through nixpkgs
           plugins = {
-            start = with pkgs.vimPlugins; [
-              lz-n
-              which-key-nvim
-              plenary-nvim
-              nui-nvim
-            ];
-
-            # Anything that you're loading lazily should be put here
-            opt = with pkgs.vimPlugins;
+            start = with pkgs.vimPlugins;
               [
+                lz-n
+                which-key-nvim
+                plenary-nvim
+                nvim-treesitter
                 oil-nvim
                 catppuccin-nvim
-                telescope-nvim
-                telescope-fzf-native-nvim
-                telescope-ui-select-nvim
-                telescope-undo-nvim
-                mini-ai
-                mini-surround
-                mini-comment
-                mini-pairs
-                mini-indentscope
-                mini-statusline
-                gitsigns-nvim
-                nvim-web-devicons
-                render-markdown-nvim
-                todo-comments-nvim
-                grug-far-nvim
-                neogit
-                nvim-treesitter
-                nvim-treesitter-context
-                nvim-lspconfig
-                fidget-nvim
-                blink-cmp
-                conform-nvim
-                none-ls-nvim
-                luasnip
-                friendly-snippets
-                lazydev-nvim
-                tiny-inline-diagnostic-nvim
-                diffview-nvim
-                typescript-tools-nvim
-                tailwind-tools-nvim
-                ccc-nvim
-                opencode-nvim
-                minuet-ai-nvim
+                snacks-nvim
               ]
-              ++ [mcp-hub-nvim.packages.${system}.default]
               ++ (attrValues {
                 inherit (pkgs.vimPlugins.nvim-treesitter) withAllGrammars;
               });
+
+            # Anything that you're loading lazily should be put here
+            opt = with pkgs.vimPlugins; [
+              gitsigns-nvim
+              blink-cmp
+              nvim-lspconfig
+              friendly-snippets
+              lazydev-nvim
+              render-markdown-nvim
+              todo-comments-nvim
+              conform-nvim
+              opencode-nvim
+              mini-icons
+              lualine-nvim
+
+              # DAP (Debug Adapter Protocol)
+              nvim-dap
+              nvim-dap-ui
+              nvim-nio
+              nvim-dap-python
+            ];
+            # ++ [mcp-hub-nvim.packages.${system}.default]
 
             dev.myconfig = {
               # you can use lib.fileset to reduce rebuilds here

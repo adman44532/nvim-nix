@@ -3,13 +3,13 @@ return {
   event = { "BufWritePre" },
   cmd = { "ConformInfo" },
   binds = {
-    {
-      "<leader>f",
-      function()
-        require("conform").format({ async = true, lsp_format = "fallback" })
-      end,
-      desc = "[F]ormat buffer",
-    },
+    -- {
+    --   "<leader>f",
+    --   function()
+    --     require("conform").format({ async = true, lsp_format = "fallback" })
+    --   end,
+    --   desc = "[F]ormat buffer",
+    -- },
   },
   after = function()
     require("conform").setup({
